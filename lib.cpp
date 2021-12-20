@@ -15,17 +15,17 @@ struct HeapWrapper
     HeapWrapper()
     {
         container = mi_malloc_tp(Container);
-        printf("created 'container' %p\n", container);
+        printf("%s: created 'container' %p\n", __FUNCTION__, container);
         container->heap = mi_heap_new();
-        printf("created heap %p\n", container->heap);
+        printf("%s: created heap %p\n", __FUNCTION__, container->heap);
     }
     ~HeapWrapper()
     {
-        printf("about to destroy heap %p\n", container->heap);
+        printf("%s: about to destroy heap %p\n", __FUNCTION__, container->heap);
         fflush(stdout);
         mi_heap_destroy(container->heap);
 
-        printf("about to destroy 'container' %p\n", container);
+        printf("%s: about to destroy 'container' %p\n", __FUNCTION__, container);
         fflush(stdout);
         mi_free(container->heap);
     }

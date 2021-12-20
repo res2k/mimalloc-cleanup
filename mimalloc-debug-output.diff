@@ -1,0 +1,20 @@
+diff --git a/src/heap.c b/src/heap.c
+index d560fbc..760e626 100644
+--- a/src/heap.c
++++ b/src/heap.c
+@@ -311,6 +311,7 @@ void _mi_heap_destroy_pages(mi_heap_t* heap) {
+ }
+ 
+ void mi_heap_destroy(mi_heap_t* heap) {
++  printf("%s: about to destroy heap %p\n", __FUNCTION__, heap);
+   mi_assert(heap != NULL);
+   mi_assert(mi_heap_is_initialized(heap));
+   mi_assert(heap->no_reclaim);
+@@ -370,6 +371,7 @@ static void mi_heap_absorb(mi_heap_t* heap, mi_heap_t* from) {
+ // Safe delete a heap without freeing any still allocated blocks in that heap.
+ void mi_heap_delete(mi_heap_t* heap)
+ {
++  printf("%s: about to delete heap %p\n", __FUNCTION__, heap);
+   mi_assert(heap != NULL);
+   mi_assert(mi_heap_is_initialized(heap));
+   mi_assert_expensive(mi_heap_is_valid(heap));
