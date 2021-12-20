@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.13)
+cmake_policy(SET CMP0077 NEW)
+project(mimalloc-issue)
+
+set(MI_OVERRIDE OFF)
+set(MI_BUILD_SHARED OFF)
+set(MI_BUILD_STATIC ON)
+set(MI_BUILD_OBJECT OFF)
+set(MI_BUILD_TESTS OFF)
+add_subdirectory(mimalloc)
+
+add_library(lib SHARED)
+target_sources(lib PRIVATE lib.cpp lib.h)
+target_compile_definitions(lib PUBLIC LIB_SHARED)
+target_compile_definitions(lib PRIVATE LIB_BUILD)
+target_link_libraries(lib PRIVATE mimalloc-static)
+
+add_executable(exe)
+target_sources(exe PRIVATE exe.cpp)
+target_link_libraries(exe PRIVATE lib)
